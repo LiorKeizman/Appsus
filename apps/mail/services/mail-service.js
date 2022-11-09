@@ -22,7 +22,7 @@ function query() {
 }
 
 function get(mailId) {
-    console.log(mailId);
+    // console.log(mailId);
     return storageService.get(MAIL_KEY, mailId)
 }
 function remove(mail, revId) {
@@ -100,7 +100,7 @@ function _createMails() {
     let emails = storageService.query(MAIL_KEY)
         .then(mails => {
             if (!mails || !mails.length) {
-                console.log('hello')
+                // console.log('hello')
                 mails = [
                     {
                         id:  _makeId(),
