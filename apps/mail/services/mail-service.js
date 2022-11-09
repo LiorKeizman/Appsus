@@ -12,7 +12,8 @@ export const mailService = {
     get,
     addReview,
     removeReview,
-    addGoogleMail
+    addGoogleMail,
+    getEmptyMail,
     // getEmptyMail,
 }
 
@@ -25,20 +26,27 @@ function get(mailId) {
     // console.log(mailId);
     return storageService.get(MAIL_KEY, mailId)
 }
-function remove(mail, revId) {
-    //     const mails = query()
-    //     const idx = mails.findIndex(mail => mail.id === mailId)
-    //     mails.splice(idx,1)
-    //     utilService.saveToStorage(MAIL_KEY,mails)
-    //   return storageService.remove(MAIL_KEY, mailId)
-    return storageService.get(MAIL_KEY, mail.id)
-        .then(mail => {
-            const idx = mail.review.findIndex(rev => rev.id === revId)
-            mail.review.splice(idx, 1)
-            storageService.put(MAIL_KEY, mail)
-            return mail
-        })
-}
+// function remove(mail, revId) {
+//     //     const mails = query()
+//     //     const idx = mails.findIndex(mail => mail.id === mailId)
+//     //     mails.splice(idx,1)
+//     //     utilService.saveToStorage(MAIL_KEY,mails)
+//     //   return storageService.remove(MAIL_KEY, mailId)
+//     return storageService.get(MAIL_KEY, mail.id)
+//         .then(mail => {
+//             const idx = mail.review.findIndex(rev => rev.id === revId)
+//             mail.review.splice(idx, 1)
+//             storageService.put(MAIL_KEY, mail)
+//             return mail
+//         })
+// }
+
+
+function remove(mailId) {
+    console.log('mailId',mailId)
+    return storageService.remove(MAIL_KEY, mailId)
+  }
+
 function addReview(mailId, review) {
     review.id = utilService.makeId()
     return storageService.get(MAIL_KEY, mailId)
@@ -60,9 +68,9 @@ function removeReview(mailId, reviewId) {
 
 function save(mail) {
     if (mail.id) {
-        return storageService.put(GOOGLE_KEY, mail)
+        return storageService.put(MAIL_KEY, mail)
     } else {
-        return storageService.post(GOOGLE_KEY, mail)
+        return storageService.post(MAIL_KEY, mail)
     }
 }
 // function getEmptyMail(){
@@ -91,6 +99,11 @@ function _makeId(length = 5) {
     return txt
 }
 
+
+function getEmptyMail(subject='', body='',to='') {
+    return { id: '', subject, body,to}
+}
+
 const loggedinUser = {
     email: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
@@ -99,7 +112,7 @@ const loggedinUser = {
 function _createMails() {
     let emails = storageService.query(MAIL_KEY)
         .then(mails => {
-            if (!mails || !mails.length) {
+            if (!mails || !mails.length ) {
                 // console.log('hello')
                 mails = [
                     {

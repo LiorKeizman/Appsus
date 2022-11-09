@@ -1,9 +1,9 @@
 export default {
   template: `
         <section>
-            <datalist :id="listId">
+            <!-- <datalist :id="listId">
                 <option v-for="opt in info.opts" :value="opt" />
-            </datalist>
+            </datalist> -->
             <label v-for ="note in notes" :key="note.id">
                 <input type="checkbox" id="horns" name="horns">
                 <label for="horns">{{info.todos.txt}}</label>

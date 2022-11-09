@@ -1,0 +1,20 @@
+li{
+    list-style-type: none;
+    display: flex;
+    /* flex-direction: row;
+    gap: 30px;
+    justify-content: flex-start;
+    background-color: aqua;
+    border: #f5e5e5 1px solid; */
+}
+
+.mail-preview{
+    width: 80vw;
+
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: flex-start;
+    background-color: aqua;
+    border: #f5e5e5 1px solid;
+}
