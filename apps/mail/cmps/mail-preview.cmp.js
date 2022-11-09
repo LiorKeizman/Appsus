@@ -8,13 +8,7 @@ export default{
 
     data(){
         return{
-            // id: 'e101',
-            // subject: 'Miss you!',
-            // body: 'Would love to catch up sometimes',
-            // isRead: false,
-            // sentAt: 1551133930594,
-            // from: 'momo@momo.com',
-            // to: 'user@appsus.com'
+
         }
     },
     computed:{

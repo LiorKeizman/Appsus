@@ -14,7 +14,7 @@ export default{
     methods:{
         showDetails(mail){
             // console.log(this.$router);
-            this.$router.push('/mail/' + mail.id)
+            this.$router.push('/email/' + mail.id)
             // this.$emit('selected',mail)
         }
 
