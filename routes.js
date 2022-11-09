@@ -2,6 +2,7 @@ import homePage from './views/app-home.cmp.js'
 import aboutPage from './views/app-about.cmp.js'
 import mailIndex from './apps/mail/pages/mail-index.cmp.js'
 import mailDetails from './apps/mail/pages/mail-details.cmp.js'
+import mailEditCmp from './apps/mail/pages/mail-edit.cmp.js'
 import noteIndex from './apps/keep/pages/note-index.cmp.js'
 // import noteDetails from './apps/mail/pages/note-details.cmp.js'
 
@@ -25,6 +26,10 @@ const routerOptions = {
 			path: '/email/:id',
 			component: mailDetails,
 		},
+		{
+            path: '/email/edit/:id?',
+            component: mailEditCmp
+        },
 		{
 			path: '/keep',
 			component: noteIndex,

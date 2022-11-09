@@ -1,7 +1,7 @@
 export default {
   template: `
         <section>
-            <!-- <datalist :id="listId">
+            <!-- <!-- <datalist :id="listId">
                 <option v-for="opt in info.opts" :value="opt" />
             </datalist> -->
             <h1>{{note.id}}</h1>

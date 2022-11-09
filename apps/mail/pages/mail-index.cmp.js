@@ -15,7 +15,9 @@ import mailList from "../cmps/mail-list.cmp.js"
 export default {
     template: `
     <h1>Hello</h1>
-    <section class="mail-app main-content">
+    <router-link to=/email/edit> compose mail</router-link>
+    <!-- <a href="#/mail/edit" class="">compose mail</a> -->
+    <section class="mail-app main-content flex">
         <aside>
             <ul>
                 <li><button></button></li>
@@ -26,7 +28,10 @@ export default {
             </ul>
         </aside>
     <!-- <pre>{{mails}}</pre> -->
-    <mail-list v-if="mails" :mails="mails"/>
+    <mail-list 
+    v-if="mails" 
+    @remove="removeMail"
+    :mails="mails"/>
        <!-- <mail-filter @filtered="setFilter" /> -->
        <!-- <mail-details @closeDetail="closeDetail" v-if="selectedMail" :mail="selectedMail"/> -->
    </section>
@@ -57,6 +62,15 @@ export default {
         },
         closeDetail(selectedMail) {
             this.selectedMail = selectedMail
+        },
+        removeMail(mailId) {
+            console.log('mailId:',mailId)
+            mailService.remove(mailId)
+                .then(() => {
+                    const idx = this.mails.findIndex(mail => mail.id === mailId)
+                    this.mails.splice(idx, 1)
+                })
+
         },
     },
     computed: {

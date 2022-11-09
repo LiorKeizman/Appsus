@@ -6,22 +6,20 @@ export default{
     <section class="mail-list">
     <ul>
         <li v-for ="mail in mails" :key="mail.id">
-            <mail-preview @click="showDetails(mail)" :mail="mail" />
-            <button @click="changeRead(mail)">x</button>
+            <mail-preview @click="showDetails(mail)" :mail="mail"/>
+            <button @click="remove(mail.id)">x</button>
         </li>
     </ul>
    </section>
     `,
     methods:{
         showDetails(mail){
-            // console.log(this.$router);
             this.$router.push('/email/' + mail.id)
-            // this.$emit('selected',mail)
         },
-        changeRead(mail){
-            console.log(mail)
-            mail.isRead = !isRead
-        }
+        remove(mailId) {
+            // console.log('mail.id',mailId)
+            this.$emit('remove', mailId)
+        },
 
     },
     components:{
