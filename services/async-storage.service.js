@@ -4,6 +4,7 @@ export const storageService = {
     post,
     put,
     remove,
+    putNote
 }
 
 function query(entityType, delay = 500) {
@@ -32,9 +33,20 @@ function post(entityType, newEntity, append = true) {
 function put(entityType, updatedEntity) {
     console.log(updatedEntity);
     return query(entityType).then(entities => {
+        console.log(entities)
         const idx = entities.findIndex(entity => entity.id === updatedEntity.id)
         entities.splice(idx, 1, updatedEntity)
         _save(entityType, ...entities)
+        return updatedEntity
+    })
+}
+function putNote(entityType, updatedEntity) {
+    console.log(updatedEntity);
+    return query(entityType).then(entities => {
+        console.log(entities)
+        const idx = entities.findIndex(entity => entity.id === updatedEntity.id)
+        entities.splice(idx, 1, updatedEntity)
+        _save(entityType, entities)
         return updatedEntity
     })
 }

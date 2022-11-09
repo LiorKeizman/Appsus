@@ -12,6 +12,7 @@ export const noteService = {
     get,
     addReview,
     removeReview,
+    makeId,
 }
 
 function query() {
@@ -19,53 +20,59 @@ function query() {
     return storageService.query(NOTE_KEY)
 }
 
-function get(mailId) {
-    console.log(mailId);
-    return storageService.get(NOTE_KEY, mailId)
+function get(noteId) {
+    console.log(noteId);
+    return storageService.get(NOTE_KEY, noteId)
 }
-function remove(mail, revId) {
-    //     const mails = query()
-    //     const idx = mails.findIndex(mail => mail.id === mailId)
-    //     mails.splice(idx,1)
-    //     utilService.saveToStorage(NOTE_KEY,mails)
-    //   return storageService.remove(NOTE_KEY, mailId)
-    return storageService.get(NOTE_KEY, mail.id)
-        .then(mail => {
-            const idx = mail.review.findIndex(rev => rev.id === revId)
-            mail.review.splice(idx, 1)
-            storageService.put(NOTE_KEY, mail)
-            return mail
-        })
+// function remove(note, revId) {
+//     //     const notes = query()
+//     //     const idx = notes.findIndex(note => note.id === noteId)
+//     //     notes.splice(idx,1)
+//     //     utilService.saveToStorage(NOTE_KEY,notes)
+//     //   return storageService.remove(NOTE_KEY, noteId)
+//     return storageService.get(NOTE_KEY, note.id)
+//         .then(note => {
+//             const idx = note.review.findIndex(rev => rev.id === revId)
+//             note.review.splice(idx, 1)
+//             storageService.put(NOTE_KEY, note)
+//             return note
+//         })
+// }
+
+function remove(noteId) {
+    console.log(noteId)
+    return storageService.remove(NOTE_KEY, noteId)
 }
-function addReview(mailId, review) {
+function addReview(noteId, review) {
     review.id = utilService.makeId()
-    return storageService.get(NOTE_KEY, mailId)
-        .then(mail => {
-            if (!mail.reviews) mail.reviews = []
-            mail.reviews.push(review)
-            return storageService.put(NOTE_KEY, mail)
+    return storageService.get(NOTE_KEY, noteId)
+        .then(note => {
+            if (!note.reviews) note.reviews = []
+            note.reviews.push(review)
+            return storageService.put(NOTE_KEY, note)
         })
 }
-function removeReview(mailId, reviewId) {
-    return storageService.get(NOTE_KEY, mailId)
-        .then(mail => {
-            mail.reviews = mail.reviews.filter(review => review.id !== reviewId)
-            return storageService.put(NOTE_KEY, mail)
+function removeReview(noteId, reviewId) {
+    return storageService.get(NOTE_KEY, noteId)
+        .then(note => {
+            note.reviews = note.reviews.filter(review => review.id !== reviewId)
+            return storageService.put(NOTE_KEY, note)
         })
 }
 
 
 
-function save(mail) {
-    if (mail.id) {
-        return storageService.put(GOOGLE_KEY, mail)
+function save(note) {
+    console.log(note);
+    if (note.id) {
+        return storageService.putNote(NOTE_KEY, note)
     } else {
-        return storageService.post(GOOGLE_KEY, mail)
+        return storageService.post(NOTE_KEY, note)
     }
 }
 
 
-function _makeId(length = 5) {
+function makeId(length = 5) {
     var txt = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     for (var i = 0; i < length; i++) {
@@ -75,7 +82,7 @@ function _makeId(length = 5) {
 }
 
 const loggedinUser = {
-    email: 'user@appsus.com',
+    enote: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
 }
 
@@ -87,13 +94,13 @@ function _createNotes() {
                 console.log('hello')
                 note = [
                     {
-                        id:_makeId(),
+                        id:makeId(),
                         type: "text-box",
                         isPinned: true,
                         info: { txt: "Fullstack Me Baby!" }
                     },
                     {
-                        id: _makeId(),
+                        id: makeId(),
                         type: "note-img",
                         info: {
                             url: "http://some-img/me",
@@ -102,7 +109,7 @@ function _createNotes() {
                         style: { backgroundColor: "#00d" }
                     },
                     {
-                        id: _makeId(),
+                        id: makeId(),
                         type: "todos",
                         info: {
                             label: "Get my stuff together",
@@ -118,6 +125,6 @@ function _createNotes() {
                 storageService.put(NOTE_KEY, notes)
 
             }
-            // return emails
+            // return enotes
         })
 }

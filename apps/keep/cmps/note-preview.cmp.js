@@ -15,7 +15,7 @@ export default{
                         @setVal="setAns($event, idx)">
                     </component>
                 </div>
-                <button>Save</button>
+                <!-- <button>Save</button> -->
             </form>
             <pre>{{answers}}</pre>
         </section>
