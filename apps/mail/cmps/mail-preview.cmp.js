@@ -2,7 +2,7 @@ export default{
     props:['mail'],
     template:`
     <section class="mail-preview">
-        <h1>{{mail.id}} - {{mail.subject}}</h1>
+        <h1>{{mail.id}} - {{mail.subject}} </h1>
     </section>
     `,
 
