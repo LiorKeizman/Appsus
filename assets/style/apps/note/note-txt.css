@@ -1,0 +1,13 @@
+.note-txt{
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .note-txt p{
+    margin: 0;
+    display: block;
+    max-height: 450px;
+    overflow: auto;
+    overflow-wrap:anywhere;
+  }

@@ -1,51 +1,45 @@
 import { noteService } from '../services/note-service.js'
-
+import noteActions from '../cmps/note-actions.cmp.js'
 
 
 export default {
   template: `
-        <section>
-            <!-- <datalist :id="listId">
-                <option v-for="opt in info.opts" :value="opt" />
-            </datalist> -->
-            <label>
-              <h2>{{note.info.txt}}</h2>
-              <button @click.stop.prevent="isShown = !isShown">edit</button>
-                <section v-if="isShown" class="edit-note">
-                <input name="create" v-model="note.info.txt"  type="text" />
-                <button @click.prevent.stop="addNewNote">click add</button>
-                </section>
-            </label>  
+
+        <section class="note-txt">
+              <p>{{note.info.txt}}</p>
+              <note-actions @delete="deleted(note.id)" @edit="display(note.id)"/>
         </section>
         `,
   props: ['note'],
   data() {
     return {
-      cmpId : parseInt(Math.random() * 1000),
       val: '',
-      isShown:true,
+      isShown:false,
     }
   },
   methods: {
     reportVal() {
       this.$emit('setVal', this.val)
     },
-    // openToEdit(){
-    //   console.log('clicked')
-    //     this.isOpen = !this.isOpen
-    // },
     addNewNote(){
-      // ev.preventDefault()
-      console.log(this.note)
       noteService.save(this.note)
-    }
+    },
+    display(noteId){
+      console.log(noteId);
+      this.$emit('open',noteId)
+    },
+    deleted(noteId){
+      this.$emit('delete',noteId)
+    },
   },
   computed: {
     listId() {
       return 'list' + this.cmpId
-    }
+    },
+    
   },
   components:{
-    noteService
+    noteService,
+    noteActions
   }
 }

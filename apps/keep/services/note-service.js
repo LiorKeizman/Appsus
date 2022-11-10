@@ -97,13 +97,19 @@ function _createNotes() {
                         id:makeId(),
                         type: "text-box",
                         isPinned: true,
+                        isEdit: false,
+                        isColor:false,
+                        color:'green',
                         info: { txt: "Fullstack Me Baby!" }
                     },
                     {
                         id: makeId(),
                         type: "note-img",
+                        isEdit: false,
+                        isColor:false,
+                        color:'green',
                         info: {
-                            url: "http://some-img/me",
+                            url: "assets/img/03.jpg",
                             title: "Bobi and Me"
                         },
                         style: { backgroundColor: "#00d" }
@@ -111,6 +117,9 @@ function _createNotes() {
                     {
                         id: makeId(),
                         type: "todos",
+                        isEdit: false,
+                        isColor:false,
+                        color:'green',
                         info: {
                             label: "Get my stuff together",
                             todos: [

@@ -1,17 +1,32 @@
-.card {
-    border-bottom: rgb(225, 225, 225) 1px solid;
-    flex-basis: 40%;
-    display: flex;
-    text-align: center;
-    padding: 10px;
-    margin: 0px;
-    flex: 1 1 0px;
-    flex-basis: 25%;
-    min-width: 200px;
-    flex-grow: 0;
-  }
-  .cards-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
+@import './note-actions.css';
+@import './note-todo.css';
+@import './note-txt.css';
+@import './note-list.css';
+
+.color-pallet{
+  display: flex;
+  height: 50px;
+  width: 150px;
+  border: 1px solid black;
+}
+.color-red{
+height: 40px;
+width: 40px;
+border-radius: 50%;
+background-color: red;
+}
+.color-black{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: black;
+}
+.color-yellow{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: yellow;
+}
+.red{
+  background-color: red;
+}

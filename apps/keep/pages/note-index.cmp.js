@@ -1,6 +1,8 @@
 import { noteService } from "../services/note-service.js"
 import noteList from "../cmps/note-list.cmp.js"
-
+import userMsg from "../cmps/user-msg.cmp.js"
+import { eventBus } from "../../../services/event-bus.service.js"
+// import noteFilter from "../cmps/note-filter.cmp.js"
 
 
 // id: "n101",
@@ -9,48 +11,35 @@ import noteList from "../cmps/note-list.cmp.js"
 // info: { txt: "Fullstack Me Baby!" }
 export default {
     template: `
-    <h2>HELLO</h2>
-    <!-- <label for="create">
-        <input name="create" v-model="text" @submit="" type="text" />
-        <pre>{{text}}</pre>
-    </label> -->
-    <section v-if="note" >
-        <!-- <section v-for="n in note"> -->
-            <!-- <h2>{{note}}</h2> -->
-            <note-list @remove="removeNote" :notes="note"/>
-        <!-- </section> -->
-            <!-- <form @submit.prevent="save">
-                <div v-for="(cmp, idx) in survey.cmps">
-                    <component :is="cmp.type"  
-                        :info="cmp.info" 
-                        @setVal="setAns($event, idx)">
-                    </component>
-                </div>
-                <button>Save</button>
-            </form>
-            <pre>{{answers}}</pre> -->
+        <section v-if="note" >
+          <note-list @add="addNewNote"  @remove="removeNote" :notes="note"/>
+          <user-msg/>
         </section>
     `,
     data() {
         return {
-            
-            note:null,
-            text:'',
+            note: null,
+            text: '',
             answers: [],
+            filterBy: {},
         }
     },
     created() {
-
         console.log('Created!')
         noteService.query()
         .then(note => {
+            console.log(note)
             this.note = note
-            this.answers = new Array(this.note.length)
-        })
+            console.log(this.note)
+                this.answers = new Array(this.note.length)
+            })
 
 
     },
     methods: {
+        setFilter(filterBy) {
+            this.filterBy = filterBy
+        },
         setAns(ans, idx) {
             console.log('Setting the answer: ', ans, 'idx:', idx)
             // this.answers[idx] = ans
@@ -59,23 +48,44 @@ export default {
         save() {
             console.log('Saving..')
         },
-        removeNote(noteId){
+        removeNote(noteId) {
             noteService.remove(noteId)
                 .then(() => {
                     const idx = this.note.findIndex(note => note.id === noteId)
                     this.note.splice(idx, 1)
-                    showSuccessMsg(`Car ${noteId} deleted`)
+                    // showSuccessMsg(`Car ${noteId} deleted`)
+                    const msg ={
+                        txt:`Book ${this.book.title} was reviewed`,
+                        type:'success',
+                        // link:`/book/${book.id}`
+                    }
+                    eventBus.emit('user-msg' , msg)
                 })
-                .catch(err =>{
+                .catch(err => {
                     console.log('OOPS', err)
                     showErrorMsg('Cannot remove note')
                 })
-            }
-        
+        },
+        addNewNote(newNote){
+            noteService.save(newNote)
+            .then(note => this.note.push(note))
+        }
+
     },
+
+    // computed: {
+    //     notesToShow() {
+    //         console.log(this.note);
+    //         console.log('HEllo');
+    //         const regex = new RegExp(this.filterBy.txt, 'i')
+    //         const filteredBooks = this.note.filter(note => regex.test(note.txt))
+    //         return filteredBooks
+    // },
     components: {
         noteService,
         noteList,
+        userMsg,
+        // noteFilter,
     }
 }
-
+//  }
