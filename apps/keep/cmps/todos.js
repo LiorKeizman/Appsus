@@ -1,17 +1,17 @@
 export default {
   template: `
         <section>
-            <!-- <datalist :id="listId">
+            <!-- <!-- <datalist :id="listId">
                 <option v-for="opt in info.opts" :value="opt" />
             </datalist> -->
-            <label v-for ="note in notes" :key="note.id">
-                <input type="checkbox" id="horns" name="horns">
-                <label for="horns">{{info.todos.txt}}</label>
-              
+            <h1>{{note.id}}</h1>
+            <label v-for ="todo in note.info.todos" :key="note.id">
+                <input type="checkbox" id="horns" name="note.id">
+                <label for="note.id">{{todo.txt}}</label>
             </label>  
         </section>
         `,
-  props: ['info'],
+  props: ['note'],
   data() {
     return {
       cmpId : parseInt(Math.random() * 1000),

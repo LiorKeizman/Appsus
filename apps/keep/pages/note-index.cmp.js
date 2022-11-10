@@ -10,10 +10,14 @@ import noteList from "../cmps/note-list.cmp.js"
 export default {
     template: `
     <h2>HELLO</h2>
+    <!-- <label for="create">
+        <input name="create" v-model="text" @submit="" type="text" />
+        <pre>{{text}}</pre>
+    </label> -->
     <section v-if="note" >
         <!-- <section v-for="n in note"> -->
-            <h2>{{note.id}}</h2>
-            <note-list :notes="note"/>
+            <!-- <h2>{{note}}</h2> -->
+            <note-list @remove="removeNote" :notes="note"/>
         <!-- </section> -->
             <!-- <form @submit.prevent="save">
                 <div v-for="(cmp, idx) in survey.cmps">
@@ -31,6 +35,7 @@ export default {
         return {
             
             note:null,
+            text:'',
             answers: [],
         }
     },
@@ -50,11 +55,23 @@ export default {
             console.log('Setting the answer: ', ans, 'idx:', idx)
             // this.answers[idx] = ans
             this.answers.splice(idx, 1, ans)
-
         },
         save() {
             console.log('Saving..')
-        }
+        },
+        removeNote(noteId){
+            noteService.remove(noteId)
+                .then(() => {
+                    const idx = this.note.findIndex(note => note.id === noteId)
+                    this.note.splice(idx, 1)
+                    showSuccessMsg(`Car ${noteId} deleted`)
+                })
+                .catch(err =>{
+                    console.log('OOPS', err)
+                    showErrorMsg('Cannot remove note')
+                })
+            }
+        
     },
     components: {
         noteService,
