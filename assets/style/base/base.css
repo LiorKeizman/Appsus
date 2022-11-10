@@ -21,7 +21,9 @@ h4,
 h5,
 h6 {
   margin: 0 0 1em;
-  font-family: 'Edu VIC WA NT Beginner', cursive;
+  /* font-family: 'Edu VIC WA NT Beginner', cursive; */
+  font-family: 'ariel';
+  font-weight: normal;
 }
 
 p {
@@ -55,3 +57,6 @@ button {
   outline: 1px solid gold
 }
 
+/* .router-link-exact-active{
+border-bottom: 1px solid yellowgreen;
+} */

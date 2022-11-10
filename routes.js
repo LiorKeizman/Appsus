@@ -30,6 +30,10 @@ const routerOptions = {
             path: '/email/edit/:id?',
             component: mailEditCmp
         },
+		// {
+		// 	path: '/sent',
+		// 	component: mailIndex,
+		// },
 		{
 			path: '/keep',
 			component: noteIndex,
