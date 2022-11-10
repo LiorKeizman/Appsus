@@ -1,0 +1,36 @@
+
+.details-img{
+height: 20px;
+width: 20px;
+border-radius: 50%;
+margin-left: 0;
+}
+
+.details-subject{
+    font-size: 2em;
+    color: black;
+    margin: 0 ;
+    padding-left: 46.6px;
+}
+.details-from{
+    font-size: 0.7em;
+}
+.details-date{
+    font-size: 0.7em;
+}
+.details-body{
+    padding-left: 46.6px;
+    margin-top: 30px;
+}
+
+
+.mail-head{
+
+align-items: flex-end;
+/* justify-content: space-between; */
+
+}
+
+.deteails-conteiner{
+background-color: white;
+}

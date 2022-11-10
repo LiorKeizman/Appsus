@@ -26,20 +26,6 @@ function get(mailId) {
     // console.log(mailId);
     return storageService.get(MAIL_KEY, mailId)
 }
-// function remove(mail, revId) {
-//     //     const mails = query()
-//     //     const idx = mails.findIndex(mail => mail.id === mailId)
-//     //     mails.splice(idx,1)
-//     //     utilService.saveToStorage(MAIL_KEY,mails)
-//     //   return storageService.remove(MAIL_KEY, mailId)
-//     return storageService.get(MAIL_KEY, mail.id)
-//         .then(mail => {
-//             const idx = mail.review.findIndex(rev => rev.id === revId)
-//             mail.review.splice(idx, 1)
-//             storageService.put(MAIL_KEY, mail)
-//             return mail
-//         })
-// }
 
 
 function remove(mailId) {
@@ -117,55 +103,67 @@ function _createMails() {
                 mails = [
                     {
                         id:  _makeId(),
+                        name: 'Shlomi Bazar',
+                        imgUrl: 'https://lh3.googleusercontent.com/a-/ACNPEu-9hksrEHtZfp-8jOm3w0GJCIlceybewcJnH76c=s80-p',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
-                        isRead: false,
-                        sentAt: 1551133930594,
+                        isRead: true,
+                        sentAt: 1551111930594,
                         from: 'momo@momo.com',
                         to: 'user@appsus.com'
                     },
                     {
                         id: _makeId(),
+                        name: 'Shlomi Bazar',
+                        imgUrl: 'https://lh3.googleusercontent.com/a-/ACNPEu-9hksrEHtZfp-8jOm3w0GJCIlceybewcJnH76c=s80-p',
                         subject: 'Lov you!',
                         body: 'Hello there How are You',
-                        isRead: false,
-                        sentAt: 1551133930594,
+                        isRead: true,
+                        sentAt: 1552222930594,
                         from: 'YOYOYYOo@momo.com',
                         to: 'user@appsus.com'
                     },
                     {
                         id:  _makeId(),
+                        name: 'Shlomi Bazar',
+                        imgUrl: 'https://lh3.googleusercontent.com/a-/ACNPEu-9hksrEHtZfp-8jOm3w0GJCIlceybewcJnH76c=s80-p',
                         subject: 'Kill you!',
                         body: 'This is templete string',
                         isRead: false,
-                        sentAt: 1551133930594,
+                        sentAt: 1553333930594,
                         from: 'ALDKSJALKD@momo.com',
                         to: 'user@appsus.com'
                     },
                     {
                         id:  _makeId(),
+                        name: 'Shlomi Bazar',
+                        imgUrl: 'https://lh3.googleusercontent.com/a-/ACNPEu-9hksrEHtZfp-8jOm3w0GJCIlceybewcJnH76c=s80-p',
                         subject: 'Lala you!',
                         body: 'Lorem ipsum just for fun',
                         isRead: false,
-                        sentAt: 1551133930594,
+                        sentAt: 1554444930594,
                         from: 'NVMCXNVC@momo.com',
                         to: 'user@appsus.com'
                     },
                     {
                         id:  _makeId(),
-                        subject: 'Lala you!',
-                        body: 'Lorem ipsum just for fun',
+                        name: 'Shlomi Bazar',
+                        imgUrl: 'https://lh3.googleusercontent.com/a-/ACNPEu-9hksrEHtZfp-8jOm3w0GJCIlceybewcJnH76c=s80-p',
+                        subject: 'I Love Meir!',
+                        body: 'he is so funny and cute',
                         isRead: false,
-                        sentAt: 1551133930594,
+                        sentAt: 1555555930594,
                         from: 'user@appsus.com',
                         to: 'JONNY@appsus.com'
                     },
                     {
                         id:  _makeId(),
-                        subject: 'Lala you!',
-                        body: 'Lorem ipsum just for fun',
+                        name: 'Shlomi Bazar',
+                        imgUrl: 'https://lh3.googleusercontent.com/a-/ACNPEu-9hksrEHtZfp-8jOm3w0GJCIlceybewcJnH76c=s80-p',
+                        subject: 'where is oved ?!',
+                        body: 'ask for help then dissaper',
                         isRead: false,
-                        sentAt: 1551133930594,
+                        sentAt: 1556633930594,
                         from: 'user@appsus.com',
                         to: 'SHLOMI@appsus.com'
                     },

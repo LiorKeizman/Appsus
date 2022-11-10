@@ -1,8 +1,8 @@
 import { mailService } from "../services/mail-service.js"
 import mailList from "../cmps/mail-list.cmp.js"
 // import mailDetails from "./mail-details.cmp.js"
-// import mailFilter from "../cmps/mail-filter.cmp.js"
-// import googleList from "./google-list.cmp.js"
+import mailFilter from "../cmps/mail-filter.cmp.js"
+import mailSidebar from "../cmps/mail-sidebar.cmp.js"
 
 
 
@@ -14,43 +14,43 @@ import mailList from "../cmps/mail-list.cmp.js"
 //subject//body(txt)//labels(maybe)
 export default {
     template: `
-    <h1>Hello</h1>
-    <router-link to=/email/edit> compose mail</router-link>
+    
+
     <!-- <a href="#/mail/edit" class="">compose mail</a> -->
-    <section class="mail-app main-content flex">
-        <aside>
-            <ul>
-                <li><button></button></li>
-                <li><button></button></li>
-                <li><button></button></li>
-                <li><button></button></li>
-                <li><button></button></li>
-            </ul>
-        </aside>
-    <!-- <pre>{{mails}}</pre> -->
-    <mail-list 
-    v-if="mails" 
-    @remove="removeMail"
-    :mails="mails"/>
-       <!-- <mail-filter @filtered="setFilter" /> -->
-       <!-- <mail-details @closeDetail="closeDetail" v-if="selectedMail" :mail="selectedMail"/> -->
+    <section class="mail-app main-content ">
+        <mailSidebar/>
+        
+  
+            <div>
+            <mail-filter @filter="filter" class="flex"/>
+            <mail-list 
+            v-if="mails" 
+            @remove="removeMail"
+            :mails="mailsToShow"/>
+            
+            <!-- <mail-filter @filtered="setFilter" /> -->
+            <!-- <mail-details @closeDetail="closeDetail" v-if="selectedMail" :mail="selectedMail"/> -->
+            
+        </div>
+
+
    </section>
     
     `,
     data() {
         return {
             mails: null,
-            isShown:true,
-            isRead:false,
+            isShown: true,
+            isRead: false,
             selectedMail: null,
-            filterBy: {},
+            filterBy: null,
         }
     },
-    created(){
+    created() {
         mailService.query()
-        .then(mails => 
-            this.mails = mails
-        )
+            .then(mails =>
+                this.mails = mails
+            )
 
     },
     methods: {
@@ -64,7 +64,7 @@ export default {
             this.selectedMail = selectedMail
         },
         removeMail(mailId) {
-            console.log('mailId:',mailId)
+            console.log('mailId:', mailId)
             mailService.remove(mailId)
                 .then(() => {
                     const idx = this.mails.findIndex(mail => mail.id === mailId)
@@ -72,22 +72,40 @@ export default {
                 })
 
         },
+        filter(filterBy) {
+            // console.log(filterBy)
+            this.filterBy = filterBy
+        },
+        // showSentMails() {
+        //     console.log('this.mails',this.mails.filter(mail => mail.from === "user@appsus.com"))
+        //     return this.mails.filter(mail => mail.from === "user@appsus.com")
+        // },
+
     },
     computed: {
+        // showSentMails() {
+
+        //     if (this.mails){
+        //         console.log('this.mails',this.mails.filter(mail => mail.from === "user@appsus.com"))
+        //         return this.mails.filter(mail => mail.from === "user@appsus.com")
+        //     }
+        // },
+        // show inbox
         mailsToShow() {
-            const regex = new RegExp(this.filterBy.name, 'i')
-            const filteredMails = this.mails.filter(mail => regex.test(mail.title))
-            if (this.filterBy.fromPrice) return filteredMails.filter(mail =>
-                mail.listPrice.amount > this.filterBy.fromPrice && mail.listPrice.amount < this.filterBy.toPrice
-            )
-            return filteredMails
+            if (!this.filterBy) return this.mails.filter(mail => mail.from !== "user@appsus.com")
+            const { subject } = this.filterBy
+            const regex = new RegExp(subject, 'i')
+            return this.mails.filter(({ subject }) => (regex.test(subject)))
+
         },
-       
-      
+
+
+
     },
     components: {
         mailList,
         // mailDetails,
-        // mailFilter,
+        mailFilter,
+        mailSidebar,
     }
 }

@@ -1,0 +1,53 @@
+aside{
+width: 250px;
+/* position: absolute; */
+background-color: #f6f8fc;
+}
+
+.table-body{
+/* width: 80vw; */
+padding-inline-start: 0px;
+}
+
+.text-filter{
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.mail-app{
+    height: 70vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-search{
+background-color: #eaf1fb;
+border-radius: 10px;
+border: 0;
+padding: 10px;
+width: 70vw;
+
+}
+
+.inside-search{
+margin-bottom: 20px;
+}
+
+body{
+    background-color:#f6f8fc;
+}
+
+.logo{
+    width:109px;
+    height:40px;
+    margin-bottom: 10px;
+    border-bottom:white;
+}
+.compose{
+    width: 15vw;
+    height: 5vh;
+    background-color: #c2e7ff;
+    border-radius: 1px 12px 12px 1px;
+}
